@@ -420,6 +420,45 @@
             
         </li>
     
+        <li class="chapter " data-level="1.5.7" data-path="Iterator和ListIterator的区别是什么.html">
+            
+                <a href="Iterator和ListIterator的区别是什么.html">
+            
+                    
+                    Iterator和ListIterator的区别是什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="Array和ArrayList有什么区别.html">
+            
+                <a href="Array和ArrayList有什么区别.html">
+            
+                    
+                    数组(Array)和列表(ArrayList)有什么区别？什么时候应该使用Array而不是ArrayList？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="运算符.html">
+            
+                <a href="运算符.html">
+            
+                    
+                    什么是>>>? 什么是^? 什么是&?
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -594,6 +633,128 @@
                                 <section class="normal markdown-section">
                                 
                                 <h3 id="arraylist&#x548C;linkedlist&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;">ArrayList&#x548C;LinkedList&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;?</h3>
+<p>1.ArrayList&#x662F;&#x5B9E;&#x73B0;&#x4E86;&#x57FA;&#x4E8E;&#x52A8;&#x6001;&#x6570;&#x7EC4;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;LinkedList&#x57FA;&#x4E8E;&#x94FE;&#x8868;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;
+2.&#x5BF9;&#x4E8E;&#x968F;&#x673A;&#x8BBF;&#x95EE;get&#x548C;set&#xFF0C;ArrayList&#x7EDD;&#x5BF9;&#x4F18;&#x4E8E;LinkedList&#xFF0C;&#x56E0;&#x4E3A;LinkedList&#x8981;&#x79FB;&#x52A8;&#x6307;&#x9488;&#x3002;
+3.&#x5BF9;&#x4E8E;&#x65B0;&#x589E;&#x548C;&#x5220;&#x9664;&#x64CD;&#x4F5C;add&#x548C;remove&#xFF0C;LinedList&#x6BD4;&#x8F83;&#x5360;&#x4F18;&#x52BF;&#xFF0C;&#x56E0;&#x4E3A;ArrayList&#x8981;&#x79FB;&#x52A8;&#x6570;&#x636E;&#x3002;</p>
+<blockquote>
+<p>&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x5E76;&#x975E;&#x8FD9;&#x6837;&#xFF0C;&#x5BF9;&#x4E8E;&#x65B0;&#x589E;&#x6216;&#x5220;&#x9664;&#xFF0C;LinkedList&#x548C;ArrayList&#x5E76;&#x4E0D;&#x80FD;&#x660E;&#x786E;&#x8BF4;&#x660E;&#x8C01;&#x5FEB;&#x8C01;&#x6162;</p>
+</blockquote>
+<p><strong>&#x6539;&#x67E5;</strong></p>
+<ul>
+<li>ArrayList&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x662F;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x5730;&#x5740;&#x4E0A;,&#x800C;LinkedList&#x7684;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x90FD;&#x62E5;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x5730;&#x5740;.</li>
+<li>&#x6240;&#x4EE5;&#x5728;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x67E5;&#x627E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7531;&#x4E8E;LinkedList&#x7684;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x5730;&#x5740;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;get&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;ArrayList&#x7684;&#x901F;&#x5EA6;&#x4F1A;&#x4F18;&#x4E8E;LinkedList&#xFF0C;</li>
+<li>&#x800C;&#x66F4;&#x65B0;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x867D;&#x7136;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x5FAA;&#x73AF;&#x5FAA;&#x73AF;&#x5230;&#x6307;&#x5B9A;&#x8282;&#x70B9;&#x4FEE;&#x6539;&#x6570;&#x636E;&#xFF0C;&#x4F46;LinkedList&#x7684;&#x67E5;&#x8BE2;&#x901F;&#x5EA6;&#x5DF2;&#x7ECF;&#x662F;&#x6162;&#x7684;&#xFF0C;&#x800C;&#x4E14;&#x5BF9;&#x4E8E;LinkedList&#x800C;&#x8A00;&#xFF0C;&#x66F4;&#x65B0;&#x6570;&#x636E;&#x65F6;&#x4E0D;&#x50CF;ArrayList&#x53EA;&#x9700;&#x8981;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x4E0B;&#x6807;&#x66F4;&#x65B0;&#x5C31;&#x597D;&#xFF0C;LinkedList&#x9700;&#x8981;&#x4FEE;&#x6539;&#x6307;&#x9488;&#xFF0C;&#x901F;&#x7387;&#x4E0D;&#x8A00;&#x800C;&#x55BB;</li>
+</ul>
+<blockquote>
+<ul>
+<li>&#x4ECE;&#x6E90;&#x7801;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;ArrayList&#x60F3;&#x8981;get(int index)&#x5143;&#x7D20;&#x65F6;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;index&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;&#x5143;&#x7D20;&#xFF0C;</li>
+<li>&#x800C;LinkedList&#x9700;&#x8981;&#x901A;&#x8FC7;for&#x5FAA;&#x73AF;&#x8FDB;&#x884C;&#x67E5;&#x627E;&#xFF0C;&#x867D;&#x7136;LinkedList&#x5DF2;&#x7ECF;&#x5728;&#x67E5;&#x627E;&#x65B9;&#x6CD5;&#x4E0A;&#x505A;&#x4E86;&#x4F18;&#x5316;&#xFF0C;&#x6BD4;&#x5982;index &lt; size / 2&#xFF0C;&#x5219;&#x4ECE;&#x5DE6;&#x8FB9;&#x5F00;&#x59CB;&#x67E5;&#x627E;&#xFF0C;&#x53CD;&#x4E4B;&#x4ECE;&#x53F3;&#x8FB9;&#x5F00;&#x59CB;&#x67E5;&#x627E;&#xFF0C;&#x4F46;&#x662F;&#x8FD8;&#x662F;&#x6BD4;ArrayList&#x8981;&#x6162;&#x3002;&#x8FD9;&#x70B9;&#x662F;&#x6BCB;&#x5EB8;&#x7F6E;&#x7591;&#x7684;&#x3002;</li>
+</ul>
+</blockquote>
+<pre><code>//ArrayList: &#x83B7;&#x53D6;index&#x4F4D;&#x7F6E;&#x7684;&#x5143;&#x7D20;&#x503C;
+public E get(int index) {
+    rangeCheck(index); //&#x9996;&#x5148;&#x5224;&#x65AD;index&#x7684;&#x8303;&#x56F4;&#x662F;&#x5426;&#x5408;&#x6CD5;
+
+    return elementData(index);
+}
+
+//LinkedList: &#x83B7;&#x5F97;&#x7B2C;index&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x503C;
+public E get(int index) {
+    checkElementIndex(index);
+    return node(index).item;
+}
+
+//&#x5B9A;&#x4F4D;index&#x5904;&#x7684;&#x8282;&#x70B9;
+Node&lt;E&gt; node(int index) {
+    // assert isElementIndex(index);
+    //index&lt;size/2&#x65F6;&#xFF0C;&#x4ECE;&#x5934;&#x5F00;&#x59CB;&#x627E;
+    if (index &lt; (size &gt;&gt; 1)) {
+        Node&lt;E&gt; x = first;
+        for (int i = 0; i &lt; index; i++)
+            x = x.next;
+        return x;
+    } else { //index&gt;=size/2&#x65F6;&#xFF0C;&#x4ECE;&#x5C3E;&#x5F00;&#x59CB;&#x627E;
+        Node&lt;E&gt; x = last;
+        for (int i = size - 1; i &gt; index; i--)
+            x = x.prev;
+        return x;
+    }
+}
+</code></pre><p><strong>&#x589E;&#x5220;</strong>
+&#x5BF9;&#x4E8E;&#x6570;&#x636E;&#x7684;&#x589E;&#x52A0;&#x5143;&#x7D20;&#xFF0C;ArrayList&#x662F;&#x901A;&#x8FC7;&#x79FB;&#x52A8;&#x8BE5;&#x5143;&#x7D20;&#x4E4B;&#x540E;&#x7684;&#x5143;&#x7D20;&#x4F4D;&#x7F6E;&#xFF0C;&#x5176;&#x540E;&#x5143;&#x7D20;&#x4F4D;&#x7F6E;&#x5168;&#x90E8;+1&#xFF0C;&#x6240;&#x4EE5;&#x8017;&#x65F6;&#x8F83;&#x957F;&#xFF0C;&#x800C;LinkedList&#x53EA;&#x9700;&#x8981;&#x5C06;&#x8BE5;&#x5143;&#x7D20;&#x524D;&#x7684;&#x540E;&#x7EED;&#x6307;&#x9488;&#x6307;&#x5411;&#x8BE5;&#x5143;&#x7D20;&#x5E76;&#x5C06;&#x8BE5;&#x5143;&#x7D20;&#x7684;&#x540E;&#x7EED;&#x6307;&#x9488;&#x6307;&#x5411;&#x4E4B;&#x540E;&#x7684;&#x5143;&#x7D20;&#x5373;&#x53EF;&#x3002;&#x4E0E;&#x589E;&#x52A0;&#x76F8;&#x540C;&#xFF0C;&#x5220;&#x9664;&#x5143;&#x7D20;&#x65F6;ArrayList&#x9700;&#x8981;&#x5C06;&#x88AB;&#x5220;&#x9664;&#x5143;&#x7D20;&#x4E4B;&#x540E;&#x7684;&#x5143;&#x7D20;&#x4F4D;&#x7F6E;-1&#xFF0C;&#x800C;LinkedList&#x53EA;&#x9700;&#x8981;&#x5C06;&#x4E4B;&#x540E;&#x7684;&#x5143;&#x7D20;&#x524D;&#x7F6E;&#x6307;&#x9488;&#x6307;&#x5411;&#x524D;&#x4E00;&#x5143;&#x7D20;&#xFF0C;&#x524D;&#x4E00;&#x5143;&#x7D20;&#x7684;&#x6307;&#x9488;&#x6307;&#x5411;&#x540E;&#x4E00;&#x5143;&#x7D20;&#x5373;&#x53EF;&#x3002;&#x5F53;&#x7136;&#xFF0C;&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x82E5;&#x662F;&#x5355;&#x4E00;&#x5143;&#x7D20;&#x7684;&#x589E;&#x5220;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5728;List&#x672B;&#x7AEF;&#x589E;&#x5220;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x4E8C;&#x8005;&#x6548;&#x7387;&#x4E0D;&#x76F8;&#x4E0A;&#x4E0B;&#x3002;</p>
+<blockquote>
+<ul>
+<li>ArrayList&#x60F3;&#x8981;&#x5728;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#x63D2;&#x5165;&#x6216;&#x5220;&#x9664;&#x5143;&#x7D20;&#x65F6;&#xFF0C;&#x4E3B;&#x8981;&#x8017;&#x65F6;&#x7684;&#x662F;System.arraycopy&#x52A8;&#x4F5C;&#xFF0C;&#x4F1A;&#x79FB;&#x52A8;index&#x540E;&#x9762;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#xFF1B;</li>
+<li>LinkedList&#x4E3B;&#x8017;&#x65F6;&#x7684;&#x662F;&#x8981;&#x5148;&#x901A;&#x8FC7;for&#x5FAA;&#x73AF;&#x627E;&#x5230;index&#xFF0C;&#x7136;&#x540E;&#x76F4;&#x63A5;&#x63D2;&#x5165;&#x6216;&#x5220;&#x9664;&#x3002;&#x8FD9;&#x5C31;&#x5BFC;&#x81F4;&#x4E86;&#x4E24;&#x8005;&#x5E76;&#x975E;&#x4E00;&#x5B9A;&#x8C01;&#x5FEB;&#x8C01;&#x6162;&#xFF0C;&#x4E0B;&#x9762;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x7A0B;&#x5E8F;&#x6765;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#x4E24;&#x8005;&#x63D2;&#x5165;&#x7684;&#x901F;&#x5EA6;&#xFF1A;</li>
+</ul>
+</blockquote>
+<pre><code>//&#x5C06;index&#x4F4D;&#x7F6E;&#x7684;&#x503C;&#x8BBE;&#x4E3A;element&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x539F;&#x6765;&#x7684;&#x503C;
+public E set(int index, E element) {
+    rangeCheck(index);
+
+    E oldValue = elementData(index);
+    elementData[index] = element;
+    return oldValue;
+}
+
+//&#x5C06;element&#x6DFB;&#x52A0;&#x5230;ArrayList&#x7684;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;
+public void add(int index, E element) {
+    rangeCheckForAdd(index);
+
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    //&#x5C06;index&#x4EE5;&#x53CA;index&#x4E4B;&#x540E;&#x7684;&#x6570;&#x636E;&#x590D;&#x5236;&#x5230;index+1&#x7684;&#x4F4D;&#x7F6E;&#x5F80;&#x540E;&#xFF0C;&#x5373;&#x4ECE;index&#x5F00;&#x59CB;&#x5411;&#x540E;&#x632A;&#x4E86;&#x4E00;&#x4F4D;
+    System.arraycopy(elementData, index, elementData, index + 1,
+                     size - index); 
+    elementData[index] = element; //&#x7136;&#x540E;&#x5728;index&#x5904;&#x63D2;&#x5165;element
+    size++;
+}
+
+//&#x5220;&#x9664;ArrayList&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;&#x7684;&#x5143;&#x7D20;
+public E remove(int index) {
+    rangeCheck(index);
+
+    modCount++;
+    E oldValue = elementData(index);
+
+    int numMoved = size - index - 1;
+    if (numMoved &gt; 0)
+        //&#x5411;&#x5DE6;&#x632A;&#x4E00;&#x4F4D;&#xFF0C;index&#x4F4D;&#x7F6E;&#x539F;&#x6765;&#x7684;&#x6570;&#x636E;&#x5DF2;&#x7ECF;&#x88AB;&#x8986;&#x76D6;&#x4E86;
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    //&#x591A;&#x51FA;&#x6765;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4F4D;&#x5220;&#x6389;
+    elementData[--size] = null; // clear to let GC do its work
+
+    return oldValue;
+}
+</code></pre><pre><code>
+
+//&#x8BBE;&#x7F6E;&#x7B2C;index&#x5143;&#x7D20;&#x7684;&#x503C;
+public E set(int index, E element) {
+    checkElementIndex(index);
+    Node&lt;E&gt; x = node(index);
+    E oldVal = x.item;
+    x.item = element;
+    return oldVal;
+}
+
+//&#x5728;index&#x4E2A;&#x8282;&#x70B9;&#x4E4B;&#x524D;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x8282;&#x70B9;
+public void add(int index, E element) {
+    checkPositionIndex(index);
+
+    if (index == size)
+        linkLast(element);
+    else
+        linkBefore(element, node(index));
+}
+
+//&#x5220;&#x9664;&#x7B2C;index&#x4E2A;&#x8282;&#x70B9;
+public E remove(int index) {
+    checkElementIndex(index);
+    return unlink(node(index));
+}
+</code></pre><blockquote>
+<p>&#x53C2;&#x8003;zi</p>
+</blockquote>
 
                                 
                                 </section>
@@ -637,7 +798,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ArrayList和LinkedList有什么区别?","level":"1.5.2","depth":2,"next":{"title":"HashMap和Hashtable有什么区别?","level":"1.5.3","depth":2,"path":"集合/HashMap和Hashtable有什么区别.md","ref":"集合/HashMap和Hashtable有什么区别.md","articles":[]},"previous":{"title":"Java集合有哪些?","level":"1.5.1","depth":2,"path":"集合/Java集合有哪些.md","ref":"集合/Java集合有哪些.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"集合/ArrayList和LinkedList有什么区别.md","mtime":"2021-01-19T08:19:30.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-21T08:52:47.346Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ArrayList和LinkedList有什么区别?","level":"1.5.2","depth":2,"next":{"title":"HashMap和Hashtable有什么区别?","level":"1.5.3","depth":2,"path":"集合/HashMap和Hashtable有什么区别.md","ref":"集合/HashMap和Hashtable有什么区别.md","articles":[]},"previous":{"title":"Java集合有哪些?","level":"1.5.1","depth":2,"path":"集合/Java集合有哪些.md","ref":"集合/Java集合有哪些.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"集合/ArrayList和LinkedList有什么区别.md","mtime":"2021-01-21T10:02:54.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-21T10:24:36.053Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

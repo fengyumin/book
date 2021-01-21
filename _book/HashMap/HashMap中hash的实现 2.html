@@ -1,0 +1,759 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>你知道HashMap中hash的实现吗？为什么要这样实现？ · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="HashMap为什么使用链表与数组结构存储.html" />
+    
+    
+    <link rel="prev" href="HashMap中get和put的原理.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    引言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    多线程
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../多线程/进程和线程的区别是什么.html">
+            
+                <a href="../多线程/进程和线程的区别是什么.html">
+            
+                    
+                    进程和线程的区别是什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../多线程/线程常用的API.html">
+            
+                <a href="../多线程/线程常用的API.html">
+            
+                    
+                    线程常用的API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../多线程/创建线程有哪些方式.html">
+            
+                <a href="../多线程/创建线程有哪些方式.html">
+            
+                    
+                    创建线程有几种不同的方式？你喜欢哪一种？为什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../多线程/概括的解释下线程的几种可用状态.html">
+            
+                <a href="../多线程/概括的解释下线程的几种可用状态.html">
+            
+                    
+                    概括的解释下线程的几种可用状态.
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../多线程/5.md">
+            
+                <span>
+            
+                    
+                    同步方法和同步代码块的区别是什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../多线程/什么是死锁.html">
+            
+                <a href="../多线程/什么是死锁.html">
+            
+                    
+                    什么是可重入锁?什么是死锁(deadlock)？如何避免?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../多线程/如何中断线程.html">
+            
+                <a href="../多线程/如何中断线程.html">
+            
+                    
+                    如何中断线程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../多线程/7.md">
+            
+                <span>
+            
+                    
+                    例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    线程池
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../线程池/如何反复执行定时任务.html">
+            
+                <a href="../线程池/如何反复执行定时任务.html">
+            
+                    
+                    如何反复执行定时任务?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../线程池/线程池有哪些类型.html">
+            
+                <a href="../线程池/线程池有哪些类型.html">
+            
+                    
+                    线程池有哪些类型?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../线程池/线程池的作用是什么.html">
+            
+                <a href="../线程池/线程池的作用是什么.html">
+            
+                    
+                    线程池的作用是什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    JDBC
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../JDBC/什么是JDBC.html">
+            
+                <a href="../JDBC/什么是JDBC.html">
+            
+                    
+                    什么是JDBC?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../JDBC/解释下驱动在JDBC中的角色.html">
+            
+                <a href="../JDBC/解释下驱动在JDBC中的角色.html">
+            
+                    
+                    解释下驱动(Driver)在JDBC中的角色
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    集合
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../集合/Java集合有哪些.html">
+            
+                <a href="../集合/Java集合有哪些.html">
+            
+                    
+                    Java集合有哪些?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../集合/ArrayList和LinkedList有什么区别.html">
+            
+                <a href="../集合/ArrayList和LinkedList有什么区别.html">
+            
+                    
+                    ArrayList和LinkedList有什么区别?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../集合/HashMap和Hashtable有什么区别.html">
+            
+                <a href="../集合/HashMap和Hashtable有什么区别.html">
+            
+                    
+                    HashMap和Hashtable有什么区别?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../集合/Java中的HashMap的工作原理是什么.md">
+            
+                <span>
+            
+                    
+                    HashMap的工作原理是什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../集合/HashMap中hash的实现.md">
+            
+                <span>
+            
+                    
+                    HashMap中hash的实现？为什么要这样实现？?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../集合/hashCode和equals方法的重要性体现在什么地方.html">
+            
+                <a href="../集合/hashCode和equals方法的重要性体现在什么地方.html">
+            
+                    
+                    hashCode()和equals()方法的重要性体现在什么地方?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../集合/例子.md">
+            
+                <span>
+            
+                    
+                    例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../集合/例子.md">
+            
+                <span>
+            
+                    
+                    例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    HashMap
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="HashMap中equals和hashCode方法.html">
+            
+                <a href="HashMap中equals和hashCode方法.html">
+            
+                    
+                    HashMap中equals()和hashCode()的都有什么作用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="HashMap中get和put的原理.html">
+            
+                <a href="HashMap中get和put的原理.html">
+            
+                    
+                    HashMap中get和put的原理？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.3" data-path="HashMap中hash的实现.html">
+            
+                <a href="HashMap中hash的实现.html">
+            
+                    
+                    你知道HashMap中hash的实现吗？为什么要这样实现？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="HashMap为什么使用链表与数组结构存储.html">
+            
+                <a href="HashMap为什么使用链表与数组结构存储.html">
+            
+                    
+                    HashMap为什么使用链表与数组结构存储?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="HashMap的使用场景与特点.html">
+            
+                <a href="HashMap的使用场景与特点.html">
+            
+                    
+                    HashMap的使用场景与特点?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="HashMap的工作原理.html">
+            
+                <a href="HashMap的工作原理.html">
+            
+                    
+                    HashMap的工作原理？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="如果HashMap的大小超过了负载因子定义的容量怎么办.html">
+            
+                <a href="如果HashMap的大小超过了负载因子定义的容量怎么办.html">
+            
+                    
+                    如果HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="例子.md">
+            
+                <span>
+            
+                    
+                    例子
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >你知道HashMap中hash的实现吗？为什么要这样实现？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="&#x4F60;&#x77E5;&#x9053;hashmap&#x4E2D;hash&#x7684;&#x5B9E;&#x73B0;&#x5417;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8FD9;&#x6837;&#x5B9E;&#x73B0;&#xFF1F;">&#x4F60;&#x77E5;&#x9053;HashMap&#x4E2D;hash&#x7684;&#x5B9E;&#x73B0;&#x5417;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8FD9;&#x6837;&#x5B9E;&#x73B0;&#xFF1F;</h3>
+<blockquote>
+<ol>
+<li>&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5B58;&#x50A8;&#x952E;&#x503C;&#x5BF9;&#x5230;HashMap&#x6570;&#x7EC4;&#x91CC;&#x65F6;,&#x5176;&#x5B9E;&#x662F;&#x505A;&#x4E86;&#x4E24;&#x4EF6;&#x4E8B;.</li>
+<li>&#x4E00;&#x662F;&#x5C06;key&#x7684;hashCode&#x503C;&#x505A;&#x4E00;&#x4E2A;&#x6270;&#x52A8;&#x5904;&#x7406;, &#x4F5C;&#x4E3A;&#x5B83;&#x7684;hash&#x503C;</li>
+<li>&#x4E8C;&#x662F;, &#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;hash&#x503C;&#x7684;&#x53D6;&#x503C;&#x8303;&#x56F4;&#x8FD8;&#x5F88;&#x5E7F;,&#x56E0;&#x6B64;&#x5B9E;&#x9645;&#x5B58;&#x50A8;&#x7684;&#x6570;&#x7EC4;&#x4E0B;&#x6807;&#x662F;&#x5C06;&#x8FD9;&#x4E2A;hash&#x503C;&#x4E0E;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x8FD0;&#x7B97;&#x540E;&#x5F97;&#x5230;&#x7684;,&#x8FD9;&#x6837;&#x4F1A;&#x7F29;&#x5C0F;&#x8303;&#x56F4;.</li>
+<li>&#x8BE6;&#x7EC6;&#x6765;&#x8BF4;</li>
+<li>&#x7B2C;&#x4E00;&#x6B65;&#x6211;&#x4EEC;&#x5C06;key&#x7684;HashCode&#x503C;&#x4E0E;&#x5B83;&#x81EA;&#x8EAB;&#x505A;&#x4E00;&#x4E2A;&#x65E0;&#x7B26;&#x53F7;&#x53F3;&#x79FB;16&#x4F4D;&#x540E;,&#x518D;&#x53D6;&#x4E24;&#x8005;&#x7684;&#x5F02;&#x6216;&#x7ED3;&#x679C;. &#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;key&#x7684;hashCode&#x503C;&#x662F;32&#x4F4D;&#x5B57;&#x8282;,&#x5C31;&#x662F;8&#x4E2A;16&#x8FDB;&#x5236;&#x6570;, &#x5C06;&#x5B83;&#x53F3;&#x79FB;16&#x4F4D;,&#x53D6;&#x5F02;&#x6216;, &#x4F1A;&#x6DF7;&#x5408;&#x5B83;&#x7684;&#x9AD8;&#x4F4D;&#x548C;&#x4F4E;&#x4F4D;&#x4FE1;&#x606F;</li>
+<li>&#x4E4B;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x6DF7;&#x5408;&#x9AD8;&#x4F4E;&#x4F4D;&#x4FE1;&#x606F;, &#x662F;&#x56E0;&#x4E3A;&#x7B2C;&#x4E8C;&#x6B65;,&#x6211;&#x4EEC;&#x662F;&#x5C06;hash&#x503C;&#x4E0E;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x505A;&#x4E00;&#x4E2A;&#x4E0E;&#x8FD0;&#x7B97;,(&#x6570;&#x7EC4;&#x957F;&#x5EA6;-1),&#x5B9E;&#x9645;&#x8FD0;&#x7B97;&#x4F1A;&#x53D1;&#x73B0;&#x5B83;&#x4FDD;&#x7559;&#x7684;&#x662F;&#x8FD9;&#x4E2A;hash&#x503C;&#x7684;&#x4F4E;&#x4F4D;&#x4FE1;&#x606F;. &#x5982;&#x679C;&#x6CA1;&#x6709;&#x4E0A;&#x4E00;&#x6B65;&#x7684;&#x6270;&#x52A8;&#x8FD0;&#x7B97;&#x7684;&#x8BDD;, &#x8FD9;&#x6837;&#x4F1A;&#x5F88;&#x5BB9;&#x6613;&#x53D1;&#x751F;&#x78B0;&#x649E;</li>
+</ol>
+<p>&#x53C2;&#x8003;&#x8D44;&#x6599;: <a href="https://www.zhihu.com/question/20733617" target="_blank">https://www.zhihu.com/question/20733617</a></p>
+</blockquote>
+<pre><code>static final int hash(Object key) {
+    int h;
+    //&#x6270;&#x52A8;&#x51FD;&#x6570;: Hash&#x503C;=key&#x7684;hashCode&#x503C; &#x5F02;&#x6216; &#x81EA;&#x8EAB;&#x65E0;&#x7B26;&#x53F7;&#x53F3;&#x79FB;16&#x4F4D; 
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+
+//&#x5C06;&#x6270;&#x52A8;&#x540E;&#x5F97;&#x5230;&#x7684;hash&#x503C;&#x4E0E;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x505A;&#x8FD0;&#x7B97;&#x518D;&#x5F97;&#x5230;&#x6570;&#x7EC4;&#x7684;&#x4E0B;&#x6807;;
+bucketIndex = indexFor(hash, table.length);
+static int indexFor(int h, int length) {
+    //&#x628A;&#x6563;&#x5217;&#x503C;&#x548C;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x505A;&#x4E00;&#x4E2A;&quot;&#x4E0E;&quot;&#x64CD;&#x4F5C;&#xFF0C;
+    return h &amp; (length-1);
+}
+</code></pre><p>hashMap&#x4E2D;&#x7684;hash&#x5B9E;&#x8D28;&#x4E0A;&#x662F;&#x505A;&#x4E86;&#x4E00;&#x4E2A;&#x6270;&#x52A8;&#x51FD;&#x6570;, </p>
+<ul>
+<li>&#x56E0;&#x4E3A;key&#x5BF9;&#x5E94;&#x7684;hashCode&#x7684;&#x503C;&#x53D6;&#x503C;&#x8303;&#x56F4;&#x5E7F;,&#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x5B58;&#x50A8;, <blockquote>
+<p>key.hashCode()&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x662F;int&#x578B;&#x6563;&#x5217;&#x503C;,8&#x4E2A;16&#x8FDB;&#x5236;&#x6570;, &#x5171;32&#x4F4D;, 
+2&#x8FDB;&#x5236;32&#x4F4D;&#x5E26;&#x7B26;&#x53F7;&#x7684;int&#x8868;&#x503C;&#x8303;&#x56F4;&#x4ECE;-2147483648&#x5230;2147483648&#x3002;&#x524D;&#x540E;&#x52A0;&#x8D77;&#x6765;&#x5927;&#x6982;40&#x4EBF;&#x7684;&#x6620;&#x5C04;&#x7A7A;&#x95F4;</p>
+</blockquote>
+</li>
+<li>&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x5C06;&#x5B83;&#x6270;&#x52A8;&#x540E;&#x5F97;&#x5230;&#x7684;hash&#x503C;&#x62FF;&#x53BB;&#x4E0E;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x505A;&#x8FD0;&#x7B97;&#x518D;&#x5F97;&#x5230;&#x6570;&#x7EC4;&#x7684;&#x4E0B;&#x6807;;</li>
+</ul>
+<h3 id="h--length-1-&#x628A;&#x6563;&#x5217;&#x503C;&#x548C;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x505A;&#x4E00;&#x4E2A;&#x4E0E;&#x64CD;&#x4F5C;&#xFF0C;">h &amp; (length-1) &#x628A;&#x6563;&#x5217;&#x503C;&#x548C;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x505A;&#x4E00;&#x4E2A;&quot;&#x4E0E;&quot;&#x64CD;&#x4F5C;&#xFF0C;</h3>
+<ul>
+<li><strong> &#xFF08;&#x6570;&#x7EC4;&#x957F;&#x5EA6;-1&#xFF09; </strong>  &#x6B63;&#x597D;&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x4E2A;&#x201C;&#x4F4E;&#x4F4D;&#x63A9;&#x7801;&#x201D;</li>
+<li><strong> &amp; </strong>  &#x201C;&#x4E0E;&#x201D;&#x64CD;&#x4F5C;&#x7684;&#x7ED3;&#x679C;&#x5C31;&#x662F;&#x6563;&#x5217;&#x503C;&#x7684;&#x9AD8;&#x4F4D;&#x5168;&#x90E8;&#x5F52;&#x96F6;&#xFF0C;&#x53EA;&#x4FDD;&#x7559;&#x4F4E;&#x4F4D;&#x503C;&#xFF0C;&#x7528;&#x6765;&#x505A;&#x6570;&#x7EC4;&#x4E0B;&#x6807;&#x8BBF;&#x95EE;<blockquote>
+<p>&#x4EE5;&#x521D;&#x59CB;&#x957F;&#x5EA6;16&#x4E3A;&#x4F8B;&#xFF0C;16-1=15&#x3002;2&#x8FDB;&#x5236;&#x8868;&#x793A;&#x662F;00000000 00000000 00001111</p>
+<ul>
+<li>&#x548C;&#x67D0;&#x6563;&#x5217;&#x503C;&#x505A;&#x201C;&#x4E0E;&#x201D;&#x64CD;&#x4F5C;&#x5982;&#x4E0B;&#xFF0C;&#x7ED3;&#x679C;&#x5C31;&#x662F;&#x622A;&#x53D6;&#x4E86;&#x6700;&#x4F4E;&#x7684;&#x56DB;&#x4F4D;&#x503C;&#x3002;</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<pre><code>    0100101 11000100 00100101
+ &amp;  00000000 00000000 00001111
+ _____________________________
+    00000000 00000000 00000101    //&#x9AD8;&#x4F4D;&#x5168;&#x90E8;&#x5F52;&#x96F6;&#xFF0C;&#x53EA;&#x4FDD;&#x7559;&#x672B;&#x56DB;&#x4F4D;
+</code></pre><ul>
+<li>&#x4F46;&#x8FD9;&#x65F6;&#x5019;&#x95EE;&#x9898;&#x5C31;&#x6765;&#x4E86;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x7B97;&#x6211;&#x7684;&#x6563;&#x5217;&#x503C;&#x5206;&#x5E03;&#x518D;&#x677E;&#x6563;&#xFF0C;&#x8981;&#x662F;&#x53EA;&#x53D6;&#x6700;&#x540E;&#x51E0;&#x4F4D;&#x7684;&#x8BDD;&#xFF0C;&#x78B0;&#x649E;&#x4E5F;&#x4F1A;&#x5F88;&#x4E25;&#x91CD;&#x3002;</li>
+</ul>
+<h3 id="&#x6270;&#x52A8;&#x51FD;&#x6570;-h--keyhashcode--h--16">&#x6270;&#x52A8;&#x51FD;&#x6570; (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16)</h3>
+<p>&#x672C;&#x8EAB;hashCode()&#x503C;&#x4E3A;8&#x4E2A;16&#x8FDB;&#x5236;&#x6570;&#xFF0C;&#x5171;32&#x4F4D;. &#x53F3;&#x4F4D;&#x79FB;16&#x4F4D;&#xFF0C;&#x6B63;&#x597D;&#x662F;32bit&#x7684;&#x4E00;&#x534A;&#xFF0C;&#x81EA;&#x5DF1;&#x7684;&#x9AD8;&#x534A;&#x533A;&#x548C;&#x4F4E;&#x534A;&#x533A;&#x505A;&#x5F02;&#x6216;&#xFF0C;&#x5C31;&#x662F;&#x4E3A;&#x4E86;&#x6DF7;&#x5408;&#x539F;&#x59CB;&#x54C8;&#x5E0C;&#x7801;&#x7684;&#x9AD8;&#x4F4D;&#x548C;&#x4F4E;&#x4F4D;&#xFF0C;&#x4EE5;&#x6B64;&#x6765;&#x52A0;&#x5927;&#x4F4E;&#x4F4D;&#x7684;&#x968F;&#x673A;&#x6027;&#x3002;&#x800C;&#x4E14;&#x6DF7;&#x5408;&#x540E;&#x7684;&#x4F4E;&#x4F4D;&#x63BA;&#x6742;&#x4E86;&#x9AD8;&#x4F4D;&#x7684;&#x90E8;&#x5206;&#x7279;&#x5F81;&#xFF0C;&#x8FD9;&#x6837;&#x9AD8;&#x4F4D;&#x7684;&#x4FE1;&#x606F;&#x4E5F;&#x88AB;&#x53D8;&#x76F8;&#x4FDD;&#x7559;&#x4E0B;&#x6765;&#x3002;</p>
+<hr>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="HashMap中get和put的原理.html" class="navigation navigation-prev " aria-label="Previous page: HashMap中get和put的原理？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="HashMap为什么使用链表与数组结构存储.html" class="navigation navigation-next " aria-label="Next page: HashMap为什么使用链表与数组结构存储?">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"你知道HashMap中hash的实现吗？为什么要这样实现？","level":"1.6.3","depth":2,"next":{"title":"HashMap为什么使用链表与数组结构存储?","level":"1.6.4","depth":2,"path":"HashMap/HashMap为什么使用链表与数组结构存储.md","ref":"HashMap/HashMap为什么使用链表与数组结构存储.md","articles":[]},"previous":{"title":"HashMap中get和put的原理？","level":"1.6.2","depth":2,"path":"HashMap/HashMap中get和put的原理.md","ref":"HashMap/HashMap中get和put的原理.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"HashMap/HashMap中hash的实现.md","mtime":"2021-01-21T08:49:44.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-21T07:19:53.124Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

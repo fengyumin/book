@@ -26,6 +26,9 @@ http://localhost:4000/
     * [HashMap的工作原理是什么?](集合/Java中的HashMap的工作原理是什么.md)
     * [HashMap中hash的实现？为什么要这样实现？?](集合/HashMap中hash的实现.md)
     * [hashCode()和equals()方法的重要性体现在什么地方?](集合/hashCode和equals方法的重要性体现在什么地方.md)
+    * [Iterator和ListIterator的区别是什么?](集合/Iterator和ListIterator的区别是什么.md)
+    * [数组(Array)和列表(ArrayList)有什么区别？什么时候应该使用Array而不是ArrayList？](集合/Array和ArrayList有什么区别.md)
+    * [什么是>>>? 什么是^? 什么是&?](集合/运算符.md)
 * HashMap   
     * [HashMap中equals()和hashCode()的都有什么作用？](HashMap/HashMap中equals和hashCode方法.md)
     * [HashMap中get和put的原理？](HashMap/HashMap中get和put的原理.md)
