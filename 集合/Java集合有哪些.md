@@ -1,3 +1,7 @@
+> Java集合有哪些?
+> 说说 List,Set,Map 三者的区别？
+> Arraylist 和 Vector 的区别?
+
 ### Java集合有哪些?
 > 在 Java 中除了以 Map 结尾的类之外， 其他类都实现了 Collection 接口。并且，以 Map 结尾的类都实现了 Map 接口。
 - Java 集合框架主要包括两种类型的容器，一种是集合（Collection），存储一个元素集合，另一种是图（Map），存储键/值对映射。

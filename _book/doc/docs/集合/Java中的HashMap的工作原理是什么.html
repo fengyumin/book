@@ -1,0 +1,621 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Java中的HashMap的工作原理是什么? · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="HashMap中hash的实现.html" />
+    
+    
+    <link rel="prev" href="HashMap和Hashtable有什么区别.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../多线程/README.md">
+            
+                <span>
+            
+                    
+                    多线程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../多线程/进程和线程的区别是什么.html">
+            
+                <a href="../多线程/进程和线程的区别是什么.html">
+            
+                    
+                    进程和线程的区别是什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../多线程/线程常用的API.html">
+            
+                <a href="../多线程/线程常用的API.html">
+            
+                    
+                    线程常用的API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../多线程/创建线程有哪些方式.html">
+            
+                <a href="../多线程/创建线程有哪些方式.html">
+            
+                    
+                    创建线程有几种不同的方式？你喜欢哪一种？为什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../多线程/概括的解释下线程的几种可用状态.html">
+            
+                <a href="../多线程/概括的解释下线程的几种可用状态.html">
+            
+                    
+                    概括的解释下线程的几种可用状态.
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../多线程/5.html">
+            
+                <a href="../多线程/5.html">
+            
+                    
+                    同步方法和同步代码块的区别是什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../多线程/什么是死锁.html">
+            
+                <a href="../多线程/什么是死锁.html">
+            
+                    
+                    什么是可重入锁?什么是死锁(deadlock)？如何避免?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../多线程/如何中断线程.html">
+            
+                <a href="../多线程/如何中断线程.html">
+            
+                    
+                    如何中断线程？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../多线程/7.html">
+            
+                <a href="../多线程/7.html">
+            
+                    
+                    11
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../线程池/">
+            
+                <a href="../线程池/">
+            
+                    
+                    线程池
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../线程池/如何反复执行定时任务.html">
+            
+                <a href="../线程池/如何反复执行定时任务.html">
+            
+                    
+                    如何反复执行定时任务?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../线程池/线程池有哪些类型.html">
+            
+                <a href="../线程池/线程池有哪些类型.html">
+            
+                    
+                    线程池有哪些类型?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../线程池/线程池的作用是什么.html">
+            
+                <a href="../线程池/线程池的作用是什么.html">
+            
+                    
+                    线程池的作用是什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../JDBC/README.md">
+            
+                <span>
+            
+                    
+                    JDBC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../JDBC/什么是JDBC.html">
+            
+                <a href="../JDBC/什么是JDBC.html">
+            
+                    
+                    什么是JDBC?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../JDBC/解释下驱动在JDBC中的角色.html">
+            
+                <a href="../JDBC/解释下驱动在JDBC中的角色.html">
+            
+                    
+                    解释下驱动(Driver)在JDBC中的角色
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="README.md">
+            
+                <span>
+            
+                    
+                    集合
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Java集合有哪些.html">
+            
+                <a href="Java集合有哪些.html">
+            
+                    
+                    Java集合有哪些?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="ArrayList和LinkedList有什么区别.html">
+            
+                <a href="ArrayList和LinkedList有什么区别.html">
+            
+                    
+                    ArrayList和LinkedList有什么区别?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="HashMap和Hashtable有什么区别.html">
+            
+                <a href="HashMap和Hashtable有什么区别.html">
+            
+                    
+                    HashMap和Hashtable有什么区别?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.4" data-path="Java中的HashMap的工作原理是什么.html">
+            
+                <a href="Java中的HashMap的工作原理是什么.html">
+            
+                    
+                    Java中的HashMap的工作原理是什么?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="HashMap中hash的实现.html">
+            
+                <a href="HashMap中hash的实现.html">
+            
+                    
+                    你知道HashMap中hash的实现吗？为什么要这样实现？?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="hashCode和equals方法的重要性体现在什么地方.html">
+            
+                <a href="hashCode和equals方法的重要性体现在什么地方.html">
+            
+                    
+                    hashCode()和equals()方法的重要性体现在什么地方?
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Java中的HashMap的工作原理是什么?</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<ul>
+<li>&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x4F1A;&#x4F7F;&#x7528;HashMap&#xFF1F;&#x4ED6;&#x6709;&#x4EC0;&#x4E48;&#x7279;&#x70B9;&#xFF1F;</li>
+<li>&#x4F60;&#x77E5;&#x9053;HashMap&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x5417;&#xFF1F;</li>
+<li>&#x4F60;&#x77E5;&#x9053;get&#x548C;put&#x7684;&#x539F;&#x7406;&#x5417;&#xFF1F;equals()&#x548C;hashCode()&#x7684;&#x90FD;&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;</li>
+<li>&#x4F60;&#x77E5;&#x9053;hash&#x7684;&#x5B9E;&#x73B0;&#x5417;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8FD9;&#x6837;&#x5B9E;&#x73B0;&#xFF1F;</li>
+<li>&#x5982;&#x679C;HashMap&#x7684;&#x5927;&#x5C0F;&#x8D85;&#x8FC7;&#x4E86;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;(load factor)&#x5B9A;&#x4E49;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x600E;&#x4E48;&#x529E;&#xFF1F;</li>
+</ul>
+<p>&#x53C2;&#x8003;&#x8D44;&#x6599;:<a href="https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank">https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/</a></p>
+<h3 id="&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x4F1A;&#x4F7F;&#x7528;hashmap&#xFF1F;&#x4ED6;&#x6709;&#x4EC0;&#x4E48;&#x7279;&#x70B9;&#xFF1F;">&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x4F1A;&#x4F7F;&#x7528;HashMap&#xFF1F;&#x4ED6;&#x6709;&#x4EC0;&#x4E48;&#x7279;&#x70B9;&#xFF1F;</h3>
+</blockquote>
+<pre><code>HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+map.put(&quot;&#x8BED;&#x6587;&quot;, 1);
+map.put(&quot;&#x6570;&#x5B66;&quot;, 2);&#xE5;
+map.put(&quot;&#x82F1;&#x8BED;&quot;, 3);
+map.put(&quot;&#x5386;&#x53F2;&quot;, 4);
+map.put(&quot;&#x653F;&#x6CBB;&quot;, 5);
+map.put(&quot;&#x5730;&#x7406;&quot;, 6);
+map.put(&quot;&#x751F;&#x7269;&quot;, 7);
+map.put(&quot;&#x5316;&#x5B66;&quot;, 8);
+for(Entry&lt;String, Integer&gt; entry : map.entrySet()) {
+    System.out.println(entry.getKey() + &quot;: &quot; + entry.getValue());
+}
+//&#x8FD0;&#x884C;&#x7ED3;&#x679C;: &#x653F;&#x6CBB;: 5 &#x751F;&#x7269;: 7 &#x5386;&#x53F2;: 4 &#x6570;&#x5B66;: 2 &#x5316;&#x5B66;: 8 &#x8BED;&#x6587;: 1 &#x82F1;&#x8BED;: 3 &#x5730;&#x7406;: 6
+</code></pre><p>&#x662F;&#x57FA;&#x4E8E;Map&#x63A5;&#x53E3;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B58;&#x50A8;&#x952E;&#x503C;&#x5BF9;&#x65F6;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x63A5;&#x6536;null&#x7684;&#x952E;&#x503C;&#xFF0C;&#x662F;&#x7EBF;&#x7A0B;&#x4E0D;&#x5B89;&#x5168;&#x7684;&#xFF0C;HashMap&#x5B58;&#x50A8;&#x7740;Entry(hash, key, value, next)&#x5BF9;&#x8C61;&#x3002;</p>
+<h3 id="&#x4F60;&#x77E5;&#x9053;hashmap&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x5417;&#xFF1F;">&#x4F60;&#x77E5;&#x9053;HashMap&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x5417;&#xFF1F;</h3>
+<p>HashMap&#x91C7;&#x2F64;Entry&#x6570;&#x7EC4;&#x6765;&#x5B58;&#x50A8;key-value&#x5BF9;&#xFF0C;&#x6BCF;&#x2F00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;&#x7EC4;&#x6210;&#x4E86;&#x2F00;&#x4E2A;Entry&#x5B9E;&#x4F53;&#xFF0C;Entry&#x7C7B;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x2F00;&#x4E2A;&#x5355;&#x5411;&#x7684;&#x94FE;&#x8868;&#x7ED3;&#x6784;&#xFF0C;&#x5B83;&#x5177;&#x6709;Next&#x6307;&#x9488;&#xFF0C;&#x53EF;&#x4EE5;&#x8FDE;&#x63A5;&#x4E0B;&#x2F00;&#x4E2A;Entry&#x5B9E;&#x4F53;&#x3002; &#x53EA;&#x662F;&#x5728;JDK1.8&#x4E2D;&#xFF0C;&#x94FE;&#x8868;&#x2ED3;&#x5EA6;&#x2F24;&#x4E8E;8&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x94FE;&#x8868;&#x4F1A;&#x8F6C;&#x6210;&#x7EA2;&#x2FCA;&#x6811;&#xFF01;</p>
+<ul>
+<li>Java&#x4E2D;&#x7684;HashMap&#x662F;&#x4EE5;&#x952E;&#x503C;&#x5BF9;(key-value)&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x50A8;&#x5143;&#x7D20;&#x7684;&#x3002;</li>
+<li>HashMap&#x9700;&#x8981;&#x4E00;&#x4E2A;hash&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;hashCode()&#x548C;equals()&#x65B9;&#x6CD5;&#x6765;&#x5411;&#x96C6;&#x5408;/&#x4ECE;&#x96C6;&#x5408;&#x6DFB;&#x52A0;&#x548C;&#x68C0;&#x7D22;&#x5143;&#x7D20;&#x3002;</li>
+<li>HashMap&#x7684;&#x4E00;&#x4E9B;&#x91CD;&#x8981;&#x7684;&#x7279;&#x6027;&#x662F;&#x5B83;&#x7684;&#x5BB9;&#x91CF;(capacity)&#xFF0C;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;(load factor)&#x548C;&#x6269;&#x5BB9;&#x6781;&#x9650;(threshold resizing)&#x3002;</li>
+</ul>
+<h3 id="&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;&#x94FE;&#x8868;&#x6570;&#x7EC4;">&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;&#x94FE;&#x8868;+&#x6570;&#x7EC4;?</h3>
+<p>&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x7EC4;&#x7684;&#x503C;&#x662F;&#x9650;&#x5236;&#x6B7B;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x5BF9;key&#x503C;&#x8FDB;&#x884C;&#x6563;&#x5217;&#x53D6;&#x5230;&#x4E0B;&#x6807;&#x4EE5;&#x540E;&#xFF0C;&#x653E;&#x5165;&#x5230;&#x6570;&#x7EC4;&#x4E2D;&#x65F6;&#xFF0C;&#x96BE;&#x514D;&#x51FA;&#x73B0;&#x4E24;&#x4E2A;key&#x503C;&#x4E0D;&#x540C;&#xFF0C;&#x4F46;&#x662F;&#x5374;&#x653E;&#x5165;&#x5230;&#x4E0B;&#x6807;&#x76F8;&#x540C;&#x7684;&#x683C;&#x5B50;&#x4E2D;&#xFF0C;&#x6B64;&#x65F6;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x94FE;&#x8868;&#x6765;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x94FE;&#x5F0F;&#x7684;&#x5B58;&#x653E;&#x3002;</p>
+<hr>
+<h3 id="&#x4F60;&#x77E5;&#x9053;get&#x548C;put&#x7684;&#x539F;&#x7406;&#x5417;&#xFF1F;">&#x4F60;&#x77E5;&#x9053;get&#x548C;put&#x7684;&#x539F;&#x7406;&#x5417;&#xFF1F;</h3>
+<pre><code>    Map&lt;String, String&gt; hashMap = new HashMap&lt;String, String&gt;();
+    hashMap.put(&quot;name&quot;, &quot;josan&quot;);
+    String name = hashMap.get(&quot;name&quot;);
+</code></pre><p><strong>put&#x51FD;&#x6570;&#x5927;&#x81F4;&#x7684;&#x601D;&#x8DEF;&#x4E3A;&#xFF1A;</strong>
+<img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gmu4vvhoqjj30l20fz41q.jpg" alt=""></p>
+<blockquote>
+<p>&#x5F53;&#x8C03;&#x7528;put()&#x65B9;&#x6CD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;HashMap&#x4F1A;&#x8BA1;&#x7B97;key&#x7684;hash&#x503C;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x952E;&#x503C;&#x5BF9;&#x5B58;&#x50A8;&#x5728;&#x96C6;&#x5408;&#x4E2D;&#x5408;&#x9002;&#x7684;&#x7D22;&#x5F15;&#x4E0A;&#x3002;&#x5982;&#x679C;key&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E86;&#xFF0C;value&#x4F1A;&#x88AB;&#x66F4;&#x65B0;&#x6210;&#x65B0;&#x503C;&#x3002;</p>
+<ol>
+<li>&#x5BF9;key&#x7684;hashCode()&#x505A;hash&#x8FD0;&#x7B97;&#xFF0C;&#x8BA1;&#x7B97;index;</li>
+<li>&#x5982;&#x679C;&#x6CA1;&#x78B0;&#x649E;&#x76F4;&#x63A5;&#x653E;&#x5230;bucket&#x91CC;&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x78B0;&#x649E;&#x4E86;&#xFF0C;&#x4EE5;&#x94FE;&#x8868;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x5728;buckets&#x540E;&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x78B0;&#x649E;&#x5BFC;&#x81F4;&#x94FE;&#x8868;&#x8FC7;&#x957F;(&#x5927;&#x4E8E;&#x7B49;&#x4E8E;TREEIFY_THRESHOLD)&#xFF0C;&#x5C31;&#x628A;&#x94FE;&#x8868;&#x8F6C;&#x6362;&#x6210;&#x7EA2;&#x9ED1;&#x6811;&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x8282;&#x70B9;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x5C31;&#x66FF;&#x6362;old value(&#x4FDD;&#x8BC1;key&#x7684;&#x552F;&#x4E00;&#x6027;)</li>
+<li>&#x5982;&#x679C;bucket&#x6EE1;&#x4E86;(&#x8D85;&#x8FC7;load factor*current capacity)&#xFF0C;&#x5C31;&#x8981;resize&#x3002;</li>
+</ol>
+</blockquote>
+<p><strong>&#x5728;&#x7406;&#x89E3;&#x4E86;put&#x4E4B;&#x540E;&#xFF0C;get&#x5C31;&#x5F88;&#x7B80;&#x5355;&#x4E86;&#x3002;&#x5927;&#x81F4;&#x601D;&#x8DEF;&#x5982;&#x4E0B;&#xFF1A;</strong></p>
+<ol>
+<li>bucket&#x91CC;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x76F4;&#x63A5;&#x547D;&#x4E2D;&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x6709;&#x51B2;&#x7A81;&#xFF0C;&#x5219;&#x901A;&#x8FC7;key.equals(k)&#x53BB;&#x67E5;&#x627E;&#x5BF9;&#x5E94;&#x7684;entry</li>
+<li>&#x82E5;&#x4E3A;&#x6811;&#xFF0C;&#x5219;&#x5728;&#x6811;&#x4E2D;&#x901A;&#x8FC7;key.equals(k)&#x67E5;&#x627E;&#xFF0C;O(logn)&#xFF1B;</li>
+<li>&#x82E5;&#x4E3A;&#x94FE;&#x8868;&#xFF0C;&#x5219;&#x5728;&#x94FE;&#x8868;&#x4E2D;&#x901A;&#x8FC7;key.equals(k)&#x67E5;&#x627E;&#xFF0C;O(n)&#x3002;</li>
+</ol>
+<h3 id="equals&#x548C;hashcode&#x7684;&#x90FD;&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;">equals()&#x548C;hashCode()&#x7684;&#x90FD;&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;</h3>
+<p>&#x901A;&#x8FC7;&#x5BF9;key&#x7684;hashCode()&#x8FDB;&#x884C;hashing&#xFF0C;&#x5E76;&#x8BA1;&#x7B97;&#x4E0B;&#x6807;( n-1 &amp; hash)&#xFF0C;&#x4ECE;&#x800C;&#x83B7;&#x5F97;buckets&#x7684;&#x4F4D;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x4EA7;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x5219;&#x5229;&#x7528;key.equals()&#x65B9;&#x6CD5;&#x53BB;&#x94FE;&#x8868;&#x6216;&#x6811;&#x4E2D;&#x53BB;&#x67E5;&#x627E;&#x5BF9;&#x5E94;&#x7684;&#x8282;&#x70B9;</p>
+<hr>
+<h3 id="&#x5982;&#x679C;hashmap&#x7684;&#x5927;&#x5C0F;&#x8D85;&#x8FC7;&#x4E86;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;load-factor&#x5B9A;&#x4E49;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x600E;&#x4E48;&#x529E;&#xFF1F;">&#x5982;&#x679C;HashMap&#x7684;&#x5927;&#x5C0F;&#x8D85;&#x8FC7;&#x4E86;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;(load factor)&#x5B9A;&#x4E49;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x600E;&#x4E48;&#x529E;&#xFF1F;</h3>
+<ul>
+<li>&#x5728;HashMap&#x4E2D;&#x6709;&#x4E24;&#x4E2A;&#x5F88;&#x91CD;&#x8981;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x5BB9;&#x91CF;(Capacity)&#x548C;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;(Load factor)</li>
+<li>&#x7B80;&#x5355;&#x7684;&#x8BF4;&#xFF0C;Capacity&#x5C31;&#x662F;buckets&#x7684;&#x6570;&#x76EE;&#xFF0C;Load factor&#x5C31;&#x662F;buckets&#x586B;&#x6EE1;&#x7A0B;&#x5EA6;&#x7684;&#x6700;&#x5927;&#x6BD4;&#x4F8B;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x5BF9;&#x8FED;&#x4EE3;&#x6027;&#x80FD;&#x8981;&#x6C42;&#x5F88;&#x9AD8;&#x7684;&#x8BDD;&#x4E0D;&#x8981;&#x628A;capacity&#x8BBE;&#x7F6E;&#x8FC7;&#x5927;&#xFF0C;&#x4E5F;&#x4E0D;&#x8981;&#x628A;load factor&#x8BBE;&#x7F6E;&#x8FC7;&#x5C0F;&#x3002;</li>
+<li>&#x5F53;bucket&#x586B;&#x5145;&#x7684;&#x6570;&#x76EE;&#xFF08;&#x5373;hashmap&#x4E2D;&#x5143;&#x7D20;&#x7684;&#x4E2A;&#x6570;&#xFF09;&#x5927;&#x4E8E;capacity*load factor&#x65F6;&#x5C31;&#x9700;&#x8981;&#x8C03;&#x6574;buckets&#x7684;&#x6570;&#x76EE;&#x4E3A;&#x5F53;&#x524D;&#x7684;2&#x500D;&#x3002;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="HashMap和Hashtable有什么区别.html" class="navigation navigation-prev " aria-label="Previous page: HashMap和Hashtable有什么区别?">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="HashMap中hash的实现.html" class="navigation navigation-next " aria-label="Next page: 你知道HashMap中hash的实现吗？为什么要这样实现？?">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Java中的HashMap的工作原理是什么?","level":"1.5.4","depth":2,"next":{"title":"你知道HashMap中hash的实现吗？为什么要这样实现？?","level":"1.5.5","depth":2,"path":"集合/HashMap中hash的实现.md","ref":"集合/HashMap中hash的实现.md","articles":[]},"previous":{"title":"HashMap和Hashtable有什么区别?","level":"1.5.3","depth":2,"path":"集合/HashMap和Hashtable有什么区别.md","ref":"集合/HashMap和Hashtable有什么区别.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"集合/Java中的HashMap的工作原理是什么.md","mtime":"2021-01-20T09:22:16.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-21T07:05:05.655Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
