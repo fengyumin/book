@@ -1,9 +1,11 @@
 ### ArrayList和LinkedList有什么区别?
 
-1.ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。
-2.对于随机访问get和set，ArrayList绝对优于LinkedList，因为LinkedList要移动指针。
-3.对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。
->但是实际情况并非这样，对于新增或删除，LinkedList和ArrayList并不能明确说明谁快谁慢
+1. ArrayList的实现是基于数组，LinkedList的实现是基于双向链表。
+2. 对于随机访问get和set，ArrayList优于LinkedList，ArrayList可以根据下标以O(1)时间复杂度对元素进行随机访问。而LinkedList的每一个元素都依靠地址指针和它后一个元素连接在一起，在这种情况下，查找某个元素的时间复杂度是O(n)
+3. 对于新增和删除操作add和remove，LinkedList优于ArrayList，因为当元素被添加到LinkedList任意位置的时候，不需要像ArrayList那样重新计算大小或者是更新索引。
+4. LinkedList比ArrayList更占内存，因为LinkedList的节点除了存储数据，还存储了两个引用，一个指向前一个元素，一个指向后一个元素。
+
+
 
 **改查**
 - ArrayList的所有数据是在同一个地址上,而LinkedList的每个数据都拥有自己的地址.
@@ -14,14 +16,16 @@
 > - 而LinkedList需要通过for循环进行查找，虽然LinkedList已经在查找方法上做了优化，比如index < size / 2，则从左边开始查找，反之从右边开始查找，但是还是比ArrayList要慢。这点是毋庸置疑的。
 
 ```
-//ArrayList: 获取index位置的元素值
+//查询 (获取index位置的元素值)
+
+//ArrayList: 
 public E get(int index) {
     rangeCheck(index); //首先判断index的范围是否合法
 
     return elementData(index);
 }
 
-//LinkedList: 获得第index个节点的值
+//LinkedList: 
 public E get(int index) {
     checkElementIndex(index);
     return node(index).item;
@@ -45,17 +49,10 @@ Node<E> node(int index) {
 }
 ```
 
-
-
-
-**增删**
-对于数据的增加元素，ArrayList是通过移动该元素之后的元素位置，其后元素位置全部+1，所以耗时较长，而LinkedList只需要将该元素前的后续指针指向该元素并将该元素的后续指针指向之后的元素即可。与增加相同，删除元素时ArrayList需要将被删除元素之后的元素位置-1，而LinkedList只需要将之后的元素前置指针指向前一元素，前一元素的指针指向后一元素即可。当然，事实上，若是单一元素的增删，尤其是在List末端增删一个元素，二者效率不相上下。
-
-> - ArrayList想要在指定位置插入或删除元素时，主要耗时的是System.arraycopy动作，会移动index后面所有的元素；
-> - LinkedList主耗时的是要先通过for循环找到index，然后直接插入或删除。这就导致了两者并非一定谁快谁慢，下面通过一个测试程序来测试一下两者插入的速度：
-
 ```
-//将index位置的值设为element，并返回原来的值
+// 修改:(将index位置的值设为element，并返回原来的值)
+
+//ArrayList: 
 public E set(int index, E element) {
     rangeCheck(index);
  
@@ -64,7 +61,31 @@ public E set(int index, E element) {
     return oldValue;
 }
  
-//将element添加到ArrayList的指定位置
+//LinkedList: 
+public E set(int index, E element) {
+    checkElementIndex(index);
+    Node<E> x = node(index);
+    E oldVal = x.item;
+    x.item = element;
+    return oldVal;
+}
+```
+
+**增删**
+1. 对于数据的增加元素，
+- ArrayList是通过移动该元素之后的元素位置，其后元素位置全部+1，所以耗时较长，
+- 而LinkedList只需要将该元素前的后续指针指向该元素并将该元素的后续指针指向之后的元素即可。
+2. 与增加相同，删除元素时
+- ArrayList需要将被删除元素之后的元素位置-1，
+- 而LinkedList只需要将之后的元素前置指针指向前一元素，前一元素的指针指向后一元素即可。当然，事实上，若是单一元素的增删，尤其是在List末端增删一个元素，二者效率不相上下。
+
+> - ArrayList想要在指定位置插入或删除元素时，主要耗时的是System.arraycopy动作，会移动index后面所有的元素；
+> - LinkedList主耗时的是要先通过for循环找到index，然后直接插入或删除。这就导致了两者并非一定谁快谁慢，下面通过一个测试程序来测试一下两者插入的速度：
+
+```
+// 增加:(将element添加到ArrayList的指定位置)
+
+//ArrayList: 
 public void add(int index, E element) {
     rangeCheckForAdd(index);
  
@@ -75,8 +96,24 @@ public void add(int index, E element) {
     elementData[index] = element; //然后在index处插入element
     size++;
 }
+
+//LinkedList: 
+public void add(int index, E element) {
+    checkPositionIndex(index);
  
-//删除ArrayList指定位置的元素
+    if (index == size)
+        linkLast(element);
+    else
+        linkBefore(element, node(index));
+}
+ 
+
+```
+
+```
+// 删除:(删除ArrayList指定位置的元素)
+
+//ArrayList: 
 public E remove(int index) {
     rangeCheck(index);
  
@@ -93,31 +130,8 @@ public E remove(int index) {
  
     return oldValue;
 }
-```
 
-```
-
- 
-//设置第index元素的值
-public E set(int index, E element) {
-    checkElementIndex(index);
-    Node<E> x = node(index);
-    E oldVal = x.item;
-    x.item = element;
-    return oldVal;
-}
- 
-//在index个节点之前添加新的节点
-public void add(int index, E element) {
-    checkPositionIndex(index);
- 
-    if (index == size)
-        linkLast(element);
-    else
-        linkBefore(element, node(index));
-}
- 
-//删除第index个节点
+//LinkedList: 
 public E remove(int index) {
     checkElementIndex(index);
     return unlink(node(index));
@@ -125,4 +139,6 @@ public E remove(int index) {
 
 ```
 
-> 参考zi
+> 参考资料:
+> -  https://blog.csdn.net/eson_15/article/details/51145788
+> -  https://zhuanlan.zhihu.com/p/33141246
